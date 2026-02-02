@@ -51,7 +51,7 @@ const TaskListComponent = ({ isChatOpen, onTaskSelect, showTodayTasksOnly }: Tas
 
     // Apply today's tasks filter if enabled
     if (showTodayTasksOnly) {
-      matchesFilter = matchesFilter && task.dueDate && isToday(task.dueDate);
+      matchesFilter = matchesFilter && !!task.dueDate && isToday(task.dueDate);
     }
 
     return matchesFilter;
