@@ -206,7 +206,7 @@ This project follows the Spec-Driven Development approach with specifications in
 
 ### GitHub Pages Deployment
 
-This project is configured to automatically deploy to GitHub Pages when changes are pushed to the main branch. The deployment is handled by the GitHub Actions workflow defined in `.github/workflows/github-pages.yml`.
+This project is configured to automatically deploy to GitHub Pages when changes are pushed to the main branch. The deployment is handled by the GitHub Actions workflow defined in `.github/workflows/deploy.yml`.
 
 ### Manual Deployment
 
