@@ -8,7 +8,7 @@ import ChatInterface from '../../components/ChatInterface';
 const ChatPage = () => {
   const router = useRouter();
   const { user, loadingState } = useApp();
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
     if (!loadingState.auth && !user) {
