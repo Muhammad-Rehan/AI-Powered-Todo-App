@@ -4,7 +4,7 @@ import React, { useState, memo } from 'react';
 import { Task } from '../../types/task'; // Changed from services/api to types/task
 import { useApp } from '../../contexts/AppContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTag, faCalendarAlt, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTag, faCalendarAlt, faExclamationCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 
 interface TaskItemProps {
