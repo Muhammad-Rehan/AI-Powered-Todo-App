@@ -13,7 +13,7 @@ export interface Task {
 class ApiService {
   private baseUrl =
     process.env.NEXT_PUBLIC_API_BASE_URL ??
-    "https://todo-backend-delta-six.vercel.app";
+    "http://127.0.0.1:8000";  // Default to local during development
 
   private async request(
     endpoint: string,
@@ -68,14 +68,14 @@ class ApiService {
   // Authentication
   // ------------------------------
   async signIn(email: string, password: string) {
-    return await this.request("/auth/signin", {
+    return await this.request("/api/auth/signin", {
       method: "POST",
       body: JSON.stringify({ email, password }),
     });
   }
 
   async signUp(email: string, password: string) {
-    return await this.request("/auth/signup", {
+    return await this.request("/api/auth/signup", {
       method: "POST",
       body: JSON.stringify({ email, password }),
     });
@@ -89,13 +89,13 @@ class ApiService {
   // Tasks
   // ------------------------------
   async getTasks(token: string) {
-    return await this.request("/tasks", {
+    return await this.request("/api/tasks/", {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
 
   async getTaskById(taskId: string, token: string) {
-    return await this.request(`/tasks/${taskId}`, {
+    return await this.request(`/api/tasks/${taskId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
@@ -104,7 +104,7 @@ class ApiService {
     taskData: Omit<Task, "id" | "created_at" | "updated_at" | "user_id">,
     token: string
   ) {
-    return await this.request("/tasks", {
+    return await this.request("/api/tasks/", {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: JSON.stringify(taskData),
@@ -112,7 +112,7 @@ class ApiService {
   }
 
   async updateTask(taskId: string, taskData: Partial<Task>, token: string) {
-    return await this.request(`/tasks/${taskId}`, {
+    return await this.request(`/api/tasks/${taskId}`, {
       method: "PUT",
       headers: { Authorization: `Bearer ${token}` },
       body: JSON.stringify(taskData),
@@ -120,14 +120,14 @@ class ApiService {
   }
 
   async deleteTask(taskId: string, token: string) {
-    return await this.request(`/tasks/${taskId}`, {
+    return await this.request(`/api/tasks/${taskId}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
   }
 
   async toggleTaskCompletion(taskId: string, token: string) {
-    return await this.request(`/tasks/${taskId}/toggle`, {
+    return await this.request(`/api/tasks/${taskId}/toggle`, {
       method: "PATCH",
       headers: { Authorization: `Bearer ${token}` },
     });

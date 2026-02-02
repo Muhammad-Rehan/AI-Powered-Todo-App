@@ -16,6 +16,12 @@ const Navbar = () => {
           <div className="flex items-center space-x-4">
             {user ? (
               <>
+                <Link
+                  href="/chat"
+                  className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-md text-sm font-medium transition-colors mr-2"
+                >
+                  AI Chat
+                </Link>
                 <span className="text-sm">Welcome, {user.email}</span>
                 <button
                   onClick={signOut}

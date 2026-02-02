@@ -12,7 +12,7 @@ parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
-from models.task import Task, TaskCreate, TaskUpdate, TaskRead
+from src.models.task import Task, TaskCreate, TaskUpdate, TaskRead
 from fastapi import HTTPException, status
 from cache.cache_service import cache_service
 
@@ -27,12 +27,7 @@ class TaskService:
 
     @staticmethod
     def create_task(session: Session, task_data: TaskCreate, user_id: UUID) -> TaskRead:
-        db_task = Task(
-            title=task_data.title,
-            description=task_data.description,
-            completed=task_data.completed,
-            user_id=user_id,
-        )
+        db_task = Task(**task_data.model_dump(), user_id=user_id) # Unpack all fields from task_data
 
         session.add(db_task)
         session.commit()
@@ -41,7 +36,11 @@ class TaskService:
         # invalidate cache
         cache_service.delete(f"user_tasks:{user_id}")
 
-        return TaskRead.model_validate(db_task)
+        # Use model_validate to include all fields, converting UUIDs to strings
+        task_dict = db_task.model_dump()
+        task_dict["id"] = str(task_dict["id"])
+        task_dict["user_id"] = str(task_dict["user_id"])
+        return TaskRead.model_validate(task_dict)
 
     @staticmethod
     def get_user_tasks(session: Session, user_id: UUID) -> List[TaskRead]:
@@ -55,7 +54,12 @@ class TaskService:
         statement = select(Task).where(Task.user_id == user_id)
         tasks = session.exec(statement).all()
 
-        task_reads = [TaskRead.model_validate(task) for task in tasks]
+        task_reads = []
+        for task in tasks:
+            task_dict = task.model_dump()
+            task_dict["id"] = str(task_dict["id"])
+            task_dict["user_id"] = str(task_dict["user_id"])
+            task_reads.append(TaskRead.model_validate(task_dict))
 
         cache_service.set(
             cache_key,
@@ -88,7 +92,11 @@ class TaskService:
         if not task:
             return None
 
-        task_read = TaskRead.model_validate(task)
+        # Use model_validate to include all fields, converting UUIDs to strings
+        task_dict = task.model_dump()
+        task_dict["id"] = str(task_dict["id"])
+        task_dict["user_id"] = str(task_dict["user_id"])
+        task_read = TaskRead.model_validate(task_dict)
 
         cache_service.set(
             cache_key,
@@ -115,19 +123,24 @@ class TaskService:
         if not task:
             return None
 
+        # Apply updates from task_data
         for field, value in task_data.model_dump(exclude_unset=True).items():
             setattr(task, field, value)
 
-        task.updated_at = datetime.utcnow()
+        task.updated_at = datetime.utcnow() # Update timestamp
 
-        session.add(task)
-        session.commit()
-        session.refresh(task)
+        session.add(task) # Stage changes
+        session.commit() # Commit changes to DB
+        session.refresh(task) # Refresh to get latest data from DB
 
         cache_service.delete(f"task:{task_id}:{user_id}")
         cache_service.delete(f"user_tasks:{user_id}")
 
-        return TaskRead.model_validate(task)
+        # Use model_validate to include all fields, converting UUIDs to strings
+        task_dict = task.model_dump()
+        task_dict["id"] = str(task_dict["id"])
+        task_dict["user_id"] = str(task_dict["user_id"])
+        return TaskRead.model_validate(task_dict)
 
     @staticmethod
     def delete_task(session: Session, task_id: UUID, user_id: UUID) -> bool:
@@ -172,4 +185,8 @@ class TaskService:
         cache_service.delete(f"task:{task_id}:{user_id}")
         cache_service.delete(f"user_tasks:{user_id}")
 
-        return TaskRead.model_validate(task)
+        # Use model_validate to include all fields, converting UUIDs to strings
+        task_dict = task.model_dump()
+        task_dict["id"] = str(task_dict["id"])
+        task_dict["user_id"] = str(task_dict["user_id"])
+        return TaskRead.model_validate(task_dict)

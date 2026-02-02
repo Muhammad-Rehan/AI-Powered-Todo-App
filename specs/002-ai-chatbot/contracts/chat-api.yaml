@@ -1,0 +1,77 @@
+openapi: 3.0.3
+info:
+  title: Todo AI Chatbot API
+  description: API for interacting with the AI-powered todo chatbot
+  version: 1.0.0
+paths:
+  /api/{user_id}/chat:
+    post:
+      summary: Send a message to the AI chatbot
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: The ID of the authenticated user
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  description: The user's message to the chatbot
+                  example: "Add a task to buy groceries"
+                conversation_id:
+                  type: string
+                  description: Optional ID of an existing conversation
+                  example: "conv_abc123"
+              required:
+                - message
+      responses:
+        '200':
+          description: Successful response from the AI chatbot
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    description: The AI chatbot's response to the user
+                    example: "I've added the task 'buy groceries' for you."
+                  conversation_id:
+                    type: string
+                    description: The ID of the conversation (new or existing)
+                    example: "conv_xyz789"
+                  tool_calls:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: The name of the MCP tool that was called
+                          example: "add_task"
+                        arguments:
+                          type: object
+                          description: Arguments passed to the tool
+                          example: {"title": "buy groceries", "user_id": "user_123"}
+                    description: List of MCP tools that were invoked during processing
+        '401':
+          description: Unauthorized - invalid or missing JWT token
+        '404':
+          description: Conversation not found (if conversation_id was provided)
+        '500':
+          description: Internal server error
+      security:
+        - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

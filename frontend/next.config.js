@@ -3,7 +3,7 @@ const nextConfig = {
   output: 'export', // This enables static exports for GitHub Pages
 
   // Optional: Add a base path if your site will be hosted at a subdirectory
-  basePath: '/Full-Stack-Todo-Web-Application',
+  // basePath: '/Full-Stack-Todo-Web-Application', // Commented out for local development
 
   trailingSlash: true, // Recommended for GitHub Pages
 

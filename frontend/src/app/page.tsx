@@ -55,13 +55,12 @@ export default function HomePage() {
       <main className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center max-w-4xl mx-auto">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 mb-6">
-            Organize Your Life with{' '}
+            An AI Powered Chatbot that helps you with your daily tasks with{' '}
             <span className="text-indigo-600">TaskFlow</span>
           </h1>
 
           <p className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-8 max-w-3xl mx-auto">
-            A powerful and intuitive todo application to help you manage tasks,
-            boost productivity, and achieve your goals effortlessly.
+            An intuitive AI Chatbot that helps you manage tasks, boost productivity, and achieve your goals effortlessly by just chatting with it.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
@@ -76,6 +75,12 @@ export default function HomePage() {
               className="px-8 py-3 bg-white text-indigo-600 font-semibold rounded-lg shadow border border-indigo-200 hover:bg-indigo-50 transition w-full sm:w-auto text-center"
             >
               Sign In
+            </Link>
+            <Link
+              href="/chat"
+              className="px-8 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-lg hover:bg-green-700 transition w-full sm:w-auto text-center"
+            >
+              Try AI Chat
             </Link>
           </div>
         </div>

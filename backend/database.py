@@ -42,8 +42,10 @@ def get_session() -> Generator[Session, None, None]:
 # Create Tables
 # ---------------------------------
 def create_db_and_tables() -> None:
-    from models.user import User   # <-- relative import for Vercel
-    from models.task import Task   # <-- relative import for Vercel
+    from src.models.user import User   # <-- relative import for Vercel
+    from src.models.task import Task   # <-- relative import for Vercel
+    from src.models.conversation import Conversation   # <-- Add Conversation model
+    from src.models.message import Message   # <-- Add Message model
 
     logger.info("Creating database tables if not present...")
     engine = get_engine()

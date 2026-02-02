@@ -11,7 +11,13 @@
       "Bash(git push origin main)",
       "Bash(git add backend/api/index.py backend/vercel.json)",
       "Bash(git add -A)",
-      "Bash(git commit -m \"Restructure backend for Vercel deployment\n\n- Move api handler to api/index.py to match Vercel''s expected structure\n- Update vercel.json to reference the correct file path\n- Adjust import paths in the handler to properly reference the src directory\n- Remove the old api.py file from root directory\")"
+      "Bash(git commit -m \"Restructure backend for Vercel deployment\n\n- Move api handler to api/index.py to match Vercel''s expected structure\n- Update vercel.json to reference the correct file path\n- Adjust import paths in the handler to properly reference the src directory\n- Remove the old api.py file from root directory\")",
+      "Bash(python -m alembic revision --autogenerate -m \"Add conversation and message models\")",
+      "Bash(set DATABASE_URL=postgresql://neondb_owner:npg_mfqNW7JHD6an@ep-rough-base-a4yps7fz-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require)",
+      "Bash(python -m alembic revision --autogenerate -m \"Add conversation and message models\" --sql)",
+      "Bash(python -m alembic revision --autogenerate -m \"Add conversation and message models\" --raiseerr)",
+      "Bash(python -m alembic upgrade head)",
+      "Bash(python -m alembic revision --autogenerate -m \"Initial migration for existing models\")"
     ]
   }
 }

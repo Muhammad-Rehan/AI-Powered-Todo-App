@@ -17,9 +17,13 @@ branch_labels = ${repr(branch_labels)}
 depends_on = ${repr(depends_on)}
 
 
-def upgrade():
-    ${upgrades | blank}
-
-
-def downgrade():
-    ${downgrades | blank}
+def upgrade() -> None:
+    op.add_column('task', sa.Column('dueDate', sa.DateTime(), nullable=True))
+    op.add_column('task', sa.Column('priority', sa.String(length=20), nullable=True,
+    server_default='Medium'))
+    op.add_column('task', sa.Column('tags', sa.JSON(), nullable=True, server_default='[]')) # Usi      JSON for list of strings
+   
+def downgrade() -> None:
+    op.drop_column('task', 'tags')
+    op.drop_column('task', 'priority')
+    op.drop_column('task', 'dueDate')

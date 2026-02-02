@@ -4,8 +4,25 @@ import React, { useState, useEffect, memo } from 'react';
 import { TaskItem } from './TaskItem';
 import { LoadingSpinner } from '../common/LoadingSpinner';
 import { useApp } from '../../contexts/AppContext';
+import clsx from 'clsx'; // Import clsx
+import { Task } from '../../types/task'; // Import Task type
 
-const TaskListComponent = () => {
+// Helper function to check if a date is today
+const isToday = (dateString: string) => {
+  const today = new Date();
+  const date = new Date(dateString);
+  return date.getDate() === today.getDate() &&
+         date.getMonth() === today.getMonth() &&
+         date.getFullYear() === today.getFullYear();
+};
+
+interface TaskListProps {
+  isChatOpen: boolean;
+  onTaskSelect: (task: Task) => void; // New prop for selecting a task
+  showTodayTasksOnly: boolean; // New prop for today's tasks filter
+}
+
+const TaskListComponent = ({ isChatOpen, onTaskSelect, showTodayTasksOnly }: TaskListProps) => {
   const {
     user,
     tasks,
@@ -27,9 +44,17 @@ const TaskListComponent = () => {
   }, [user?.user_id]);
 
   const filteredTasks = tasks.filter(task => {
-    if (filter === 'active') return !task.completed;
-    if (filter === 'completed') return task.completed;
-    return true;
+    // Apply completion status filter
+    let matchesFilter = true;
+    if (filter === 'active') matchesFilter = !task.completed;
+    if (filter === 'completed') matchesFilter = task.completed;
+
+    // Apply today's tasks filter if enabled
+    if (showTodayTasksOnly) {
+      matchesFilter = matchesFilter && task.dueDate && isToday(task.dueDate);
+    }
+
+    return matchesFilter;
   });
 
   /* Initial loading (no tasks yet) */
@@ -78,7 +103,7 @@ const TaskListComponent = () => {
             </button>
           ))}
         </div>
-      </div>
+      </div> {/* Corrected: Added missing closing div */}
 
       {/* Background refresh */}
       {loadingState.tasks && tasks.length > 0 ? (
@@ -91,7 +116,10 @@ const TaskListComponent = () => {
         </div>
       ) : (
         <div className="p-4">
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <ul className={clsx(
+            "grid gap-4",
+            isChatOpen ? "grid-cols-1" : "grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+          )}>
             {filteredTasks.map(task => (
               <li key={task.id}>
                 <TaskItem
@@ -99,6 +127,7 @@ const TaskListComponent = () => {
                   task={task}
                   onDelete={deleteTask}
                   onToggle={toggleTaskCompletion}
+                  onTaskSelect={onTaskSelect} // Pass the new prop
                 />
               </li>
             ))}

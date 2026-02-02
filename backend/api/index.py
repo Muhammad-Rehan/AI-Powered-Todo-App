@@ -15,6 +15,7 @@ from config import settings
 from database import get_engine, create_db_and_tables
 from api.auth import router as auth_router
 from api.tasks import router as tasks_router
+from src.api.chat_endpoints import router as chat_router
 from middleware.performance import PerformanceMonitoringMiddleware
 
 # Configure logger
@@ -60,11 +61,35 @@ def create_app() -> FastAPI:
     logger.info(f"CORS allowed origins: {ALLOWED_ORIGINS}")
 
     # -------------------------------
+    # ✅ Global OPTIONS handler for preflight requests
+    # -------------------------------
+    from fastapi import Request
+    from starlette.responses import Response
+
+    @app.options("/{full_path:path}")
+    async def preflight(full_path: str, request: Request):
+        # Return proper CORS headers for preflight
+        response = Response(status_code=200)
+        origin = request.headers.get("origin")
+        if origin and any(allowed_origin == origin or allowed_origin == "*" for allowed_origin in ALLOWED_ORIGINS):
+            response.headers["Access-Control-Allow-Origin"] = origin
+        else:
+            # If origin is not in allowed list, use first allowed origin (or handle as needed)
+            if ALLOWED_ORIGINS:
+                response.headers["Access-Control-Allow-Origin"] = ALLOWED_ORIGINS[0]
+
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "Authorization, Content-Type, Set-Cookie"
+        return response
+
+    # -------------------------------
     # Routers
     # -------------------------------
     # CORRECT
     app.include_router(auth_router, prefix="/api/auth", tags=["Authentication"])
     app.include_router(tasks_router, prefix="/api/tasks", tags=["Tasks"])
+    app.include_router(chat_router, prefix="/api/v1", tags=["Chat"])  # Chat endpoints at /api/v1/{user_id}/chat, etc.
 
 
     # -------------------------------
