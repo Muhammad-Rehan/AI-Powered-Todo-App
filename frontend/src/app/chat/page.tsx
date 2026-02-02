@@ -7,7 +7,7 @@ import ChatInterface from '../../components/ChatInterface';
 
 const ChatPage = () => {
   const router = useRouter();
-  const { user, loadingState } = useApp();
+  const { user, loadingState, refetchTasks, removeTaskFromState } = useApp();
   const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -28,7 +28,12 @@ const ChatPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <ChatInterface userId={userId} className="h-screen" />
+      <ChatInterface
+        userId={userId}
+        className="h-screen"
+        onTaskAdded={refetchTasks}
+        onTaskRemovedFromState={removeTaskFromState}
+      />
     </div>
   );
 };
