@@ -38,13 +38,14 @@ def _truncate_password(password: str) -> str:
 
     encoded = password.encode("utf-8")
 
-    if len(encoded) <= BCRYPT_MAX_BYTES:
-        return password
+    # Truncate at exactly 72 bytes to satisfy bcrypt requirements
+    if len(encoded) > BCRYPT_MAX_BYTES:
+        encoded = encoded[:BCRYPT_MAX_BYTES]
 
-    truncated = encoded[:BCRYPT_MAX_BYTES]
+    # Decode back to string, handling potential multi-byte character cuts
+    truncated_password = encoded.decode("utf-8", errors="ignore")
 
-    # Avoid cutting multi-byte characters
-    return truncated.decode("utf-8", errors="ignore")
+    return truncated_password
 
 
 # ------------------------------------------------------------------
