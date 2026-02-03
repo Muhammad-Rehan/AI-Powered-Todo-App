@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "mcp-server/wsgi.py",
+      "src": "mcp-server/api_handler.py",
       "use": "@vercel/python",
       "config": { "runtime": "python3.9" }
     }
@@ -10,7 +10,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/mcp-server/wsgi.py"
+      "dest": "/mcp-server/api_handler.py"
     }
   ]
 }
