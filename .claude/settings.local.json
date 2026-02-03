@@ -17,7 +17,8 @@
       "Bash(python -m alembic revision --autogenerate -m \"Add conversation and message models\" --sql)",
       "Bash(python -m alembic revision --autogenerate -m \"Add conversation and message models\" --raiseerr)",
       "Bash(python -m alembic upgrade head)",
-      "Bash(python -m alembic revision --autogenerate -m \"Initial migration for existing models\")"
+      "Bash(python -m alembic revision --autogenerate -m \"Initial migration for existing models\")",
+      "Bash(git commit -m \"Add README with Vercel deployment instructions for MCP server\")"
     ]
   }
 }

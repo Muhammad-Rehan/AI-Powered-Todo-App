@@ -119,8 +119,11 @@ async def health_check():
 
 
 
-# For Vercel deployment, make the app available as a module-level variable
-app_instance = app
+def create_app():
+    return app
+
+# For Vercel deployment
+app = create_app()
 
 # For local development
 if __name__ == "__main__":
