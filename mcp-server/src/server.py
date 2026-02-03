@@ -82,11 +82,9 @@ class MCPServer:
 
             return result
         except Exception as e:
-            print(f"Error executing tool {tool_name}: {str(e)}")
-
             return {
                 "success": False,
-                "message": f"Error executing tool {tool_name}: {str(e)}",
+                "message": f"Error executing tool {tool_name}",
                 "error_code": "EXECUTION_ERROR"
             }
 
@@ -140,12 +138,7 @@ async def handle_tool_request(tool_name: str, arguments: Dict[str, Any]) -> Dict
 
 def main():
     """Main entry point for the MCP server."""
-    print("Starting MCP Server...")
-    print(f"Available tools: {mcp_server.get_available_tools()}")
-
     # In a real implementation, this would start an HTTP server
-    # For now, we'll just print startup info
-    print("MCP Server is ready to handle tool requests")
 
 
 if __name__ == "__main__":

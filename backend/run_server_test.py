@@ -11,11 +11,10 @@ from api.index import create_app
 app = create_app()
 
 # Test if we can manually trigger the route registration
-print("Testing route registration...")
 for route in app.routes:
     if hasattr(route, 'methods') and hasattr(route, 'path'):
         if 'auth' in route.path:
-            print(f"Found auth route: {route.methods} {route.path}")
+            pass  # Found auth route
 
 # Now run with uvicorn programmatically
 import uvicorn

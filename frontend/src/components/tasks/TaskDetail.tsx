@@ -76,7 +76,6 @@ const TaskDetail: React.FC<TaskDetailProps> = ({ task, onClose }) => {
       });
       setIsEditing(false);
     } catch (error) {
-      console.error("Error updating task:", error);
     } finally {
       setIsUpdating(false);
     }
@@ -92,7 +91,6 @@ const TaskDetail: React.FC<TaskDetailProps> = ({ task, onClose }) => {
       await deleteTask(task.id);
       onClose(); // Close the detail panel after deletion
     } catch (error) {
-      console.error("Error deleting task:", error);
     } finally {
       setIsDeleting(false);
     }
@@ -104,7 +102,6 @@ const TaskDetail: React.FC<TaskDetailProps> = ({ task, onClose }) => {
       await toggleTaskCompletion(task.id);
       // The task list will refetch, so the task prop should update naturally
     } catch (error) {
-      console.error("Error toggling task completion:", error);
     } finally {
       setIsToggling(false);
     }

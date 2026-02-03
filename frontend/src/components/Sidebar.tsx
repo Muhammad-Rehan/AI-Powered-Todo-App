@@ -29,7 +29,6 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   const handleAddList = () => {
     if (newListName.trim()) {
-      console.log('Add new list:', newListName);
       setNewListName('');
       setShowNewListInput(false);
     }
@@ -37,7 +36,6 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   const handleAddTag = () => {
     if (newTagName.trim()) {
-      console.log('Add new tag:', newTagName);
       setNewTagName('');
       setShowNewTagInput(false);
     }

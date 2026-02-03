@@ -10,15 +10,13 @@ async def test_integration():
     """
     Test the integration between the backend, AI agent, and MCP server.
     """
-    print("Testing integration between backend, AI agent, and MCP server...")
 
     # Initialize the AI assistant service
     ai_service = AIAssistantService()
 
     # Test the tools registration
-    print(f"Registered tools: {len(ai_service.tools)} tools")
     for tool in ai_service.tools:
-        print(f"  - {tool['function']['name']}")
+        pass  # Just iterate to ensure tools are registered
 
     # Test a mock tool call (without actually calling the MCP server)
     # This simulates how the AI agent would call a tool
@@ -31,20 +29,13 @@ async def test_integration():
         }
     }
 
-    print("\nTesting tool call simulation...")
     try:
         # This would normally call the MCP server
         # result = await ai_service._execute_tool_call(mock_tool_call["name"], mock_tool_call["arguments"])
-        print("Tool call would be executed against MCP server")
-        print(f"Tool: {mock_tool_call['name']}")
-        print(f"Arguments: {json.dumps(mock_tool_call['arguments'], indent=2)}")
-
-        print("\nIntegration test completed successfully!")
-        print("The backend is properly configured to connect to the AI agent service,")
-        print("which in turn connects to the MCP server for task operations.")
+        pass  # Placeholder for actual integration test
 
     except Exception as e:
-        print(f"Error during integration test: {str(e)}")
+        pass
 
 
 if __name__ == "__main__":

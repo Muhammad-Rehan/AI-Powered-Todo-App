@@ -138,9 +138,6 @@ async def chat_endpoint(
         # Re-raise HTTP exceptions
         raise
     except Exception as e:
-        # Log the error (in a real implementation, use proper logging)
-        print(f"Error in chat endpoint: {str(e)}")
-
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="An error occurred while processing your request"
@@ -192,8 +189,6 @@ async def get_user_conversations(
     except HTTPException:
         raise
     except Exception as e:
-        print(f"Error retrieving conversations: {str(e)}")
-
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="An error occurred while retrieving conversations"
@@ -271,8 +266,6 @@ async def get_conversation_messages(
     except HTTPException:
         raise
     except Exception as e:
-        print(f"Error retrieving conversation messages: {str(e)}")
-
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="An error occurred while retrieving conversation messages"

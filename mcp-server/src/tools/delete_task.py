@@ -71,12 +71,9 @@ async def delete_task_tool(tool_call: Dict[str, Any]) -> Dict[str, Any]:
             db.close()
 
     except Exception as e:
-        # Log the error (in a real implementation, use proper logging)
-        print(f"Error in delete_task tool: {str(e)}")
-
         return {
             "success": False,
-            "message": f"Failed to delete task: {str(e)}",
+            "message": "Failed to delete task",
             "error_code": "INTERNAL_ERROR"
         }
 

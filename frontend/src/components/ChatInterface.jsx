@@ -28,7 +28,6 @@ const ChatInterface = ({ userId, className, showSidebar = true, onTaskAdded, onT
       const response = await apiClient.getUserConversations(userId);
       setConversations(response.conversations);
     } catch (error) {
-      console.error('Error loading conversations:', error);
     }
   };
 
@@ -44,7 +43,6 @@ const ChatInterface = ({ userId, className, showSidebar = true, onTaskAdded, onT
         timestamp: new Date(msg.created_at)
       })));
     } catch (error) {
-      console.error('Error loading conversation:', error);
     }
   };
 
@@ -103,8 +101,6 @@ const ChatInterface = ({ userId, className, showSidebar = true, onTaskAdded, onT
       }
 
     } catch (error) {
-      console.error('Error sending message:', error);
-
       const errorMessage = {
         id: `error-${Date.now()}`,
         role: 'assistant',

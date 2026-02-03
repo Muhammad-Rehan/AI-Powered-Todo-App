@@ -18,15 +18,6 @@ class PerformanceMonitoringMiddleware(BaseHTTPMiddleware):
         process_time = time.time() - start_time
         formatted_time = f"{process_time:.4f}s"
 
-        # Log slow requests (over 500ms)
-        if process_time > 0.5:
-            logging.warning(
-                f"SLOW REQUEST: {request.method} {request.url.path} took {formatted_time}"
-            )
-        else:
-            logging.info(
-                f"REQUEST: {request.method} {request.url.path} took {formatted_time}"
-            )
 
         # Add response header with processing time
         response.headers["X-Process-Time"] = formatted_time

@@ -276,10 +276,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     dispatch({ type: 'SET_LOADING', payload: { section: 'tasks', value: true } });
     try {
       const tasks = await apiService.getTasks(state.token);
-      console.log("fetchTasks: tasks received:", tasks); // DEBUG LOG
       dispatch({ type: 'SET_TASKS', payload: tasks });
     } catch (err: any) {
-      console.error("fetchTasks: error received:", err); // DEBUG LOG
       dispatch({ type: 'SET_ERROR', payload: err.message });
     }
   };

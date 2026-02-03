@@ -44,7 +44,6 @@ export const decodeToken = (token) => {
     const parts = cleanToken.split('.');
 
     if (parts.length !== 3) {
-      console.error('Invalid token format');
       return null;
     }
 
@@ -56,7 +55,6 @@ export const decodeToken = (token) => {
 
     return JSON.parse(decodedPayload);
   } catch (error) {
-    console.error('Error decoding token:', error);
     return null;
   }
 };

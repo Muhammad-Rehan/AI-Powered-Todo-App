@@ -73,7 +73,6 @@ const TaskItemComponent = ({ task, onDelete, onToggle, onTaskSelect }: TaskItemP
     try {
       await onDelete(task.id);
     } catch (error) {
-      console.error("Error during task deletion:", error);
     } finally {
       // isDeleting will naturally reset as component unmounts or task list updates
     }
@@ -84,7 +83,6 @@ const TaskItemComponent = ({ task, onDelete, onToggle, onTaskSelect }: TaskItemP
     try {
       await onToggle(task.id);
     } catch (error) {
-      console.error("Error during task toggle:", error);
     } finally {
       setIsToggling(false);
     }

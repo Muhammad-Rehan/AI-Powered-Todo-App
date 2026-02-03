@@ -17,7 +17,6 @@ app = FastAPI(
 @app.on_event('startup')
 async def startup_event():
     """Initialize the MCP server on startup."""
-    print("MCP Server starting up...")
 
 
 @app.post("/add_task")

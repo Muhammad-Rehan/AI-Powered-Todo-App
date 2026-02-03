@@ -99,12 +99,9 @@ async def list_tasks_tool(tool_call: Dict[str, Any]) -> Dict[str, Any]:
             db.close()
 
     except Exception as e:
-        # Log the error (in a real implementation, use proper logging)
-        print(f"Error in list_tasks tool: {str(e)}")
-
         return {
             "success": False,
-            "message": f"Failed to list tasks: {str(e)}",
+            "message": "Failed to list tasks",
             "error_code": "INTERNAL_ERROR"
         }
 

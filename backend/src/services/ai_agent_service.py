@@ -268,13 +268,9 @@ class AIAssistantService:
             return result
 
         except Exception as e:
-            # Log the error (in a real implementation, use proper logging)
-            print(f"Error in AI agent service: {str(e)}")
-
             return {
                 "response": "Sorry, I encountered an error while processing your request. Please try again.",
-                "tool_calls": [],
-                "error": str(e)
+                "tool_calls": []
             }
 
     async def _execute_tool_call(self, tool_name: str, tool_args: Dict[str, Any]) -> Dict[str, Any]:

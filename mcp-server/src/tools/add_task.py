@@ -61,12 +61,9 @@ async def add_task_tool(tool_call: Dict[str, Any]) -> Dict[str, Any]:
         }
 
     except Exception as e:
-        # Print full error to your server logs for debugging
-        print(f"CRITICAL Error in add_task_tool: {repr(e)}")
-        
         return {
             "success": False,
-            "message": f"Failed to add task: {str(e)}",
+            "message": "Failed to add task",
             "error_code": "INTERNAL_ERROR",
         }
 

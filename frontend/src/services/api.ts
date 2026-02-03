@@ -30,7 +30,6 @@ class ApiService {
     options: RequestInit = {}
   ): Promise<any> {
     const url = `${this.baseUrl}${endpoint}`;
-    console.log(url);
     const headers: HeadersInit = {
       ...(options.headers || {}),
     };
