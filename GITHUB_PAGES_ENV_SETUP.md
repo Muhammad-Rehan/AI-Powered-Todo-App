@@ -6,9 +6,9 @@ To connect your frontend deployed on GitHub Pages to your Vercel backend, you ne
 
 Go to your GitHub repository → Settings → Secrets and variables → Actions, and add these secrets:
 
-- `NEXT_PUBLIC_BACKEND_URL`: `https://todo-backend-delta-six.vercel.app/`
-- `NEXT_PUBLIC_API_BASE_URL`: `https://todo-backend-delta-six.vercel.app/api`
-- `NEXT_PUBLIC_BETTER_AUTH_URL`: `https://todo-backend-delta-six.vercel.app/`
+- `NEXT_PUBLIC_BACKEND_URL`: `https://ai-powered-todo-app-backend.vercel.app/`
+- `NEXT_PUBLIC_API_BASE_URL`: `https://ai-powered-todo-app-backend.vercel.app`
+- `NEXT_PUBLIC_BETTER_AUTH_URL`: `https://ai-powered-todo-app-backend.vercel.app/`
 
 ## Alternative Approach
 

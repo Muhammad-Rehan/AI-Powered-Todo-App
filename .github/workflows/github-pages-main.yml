@@ -27,9 +27,9 @@ jobs:
         run: |
           cd frontend
           # Backend / API URLs
-          echo "NEXT_PUBLIC_BACKEND_URL=${{ vars.NEXT_PUBLIC_BACKEND_URL || 'https://todo-backend-delta-six.vercel.app/' }}" >> .env.local
-          echo "NEXT_PUBLIC_API_BASE_URL=${{ vars.NEXT_PUBLIC_API_BASE_URL || 'https://todo-backend-delta-six.vercel.app' }}" >> .env.local
-          echo "NEXT_PUBLIC_BETTER_AUTH_URL=${{ vars.NEXT_PUBLIC_BETTER_AUTH_URL || 'https://todo-backend-delta-six.vercel.app/' }}" >> .env.local
+          echo "NEXT_PUBLIC_BACKEND_URL=${{ vars.NEXT_PUBLIC_BACKEND_URL || 'https://ai-powered-todo-app-backend.vercel.app/' }}" >> .env.local
+          echo "NEXT_PUBLIC_API_BASE_URL=${{ vars.NEXT_PUBLIC_API_BASE_URL || 'https://ai-powered-todo-app-backend.vercel.app' }}" >> .env.local
+          echo "NEXT_PUBLIC_BETTER_AUTH_URL=${{ vars.NEXT_PUBLIC_BETTER_AUTH_URL || 'https://ai-powered-todo-app-backend.vercel.app/' }}" >> .env.local
           # Frontend URL
           echo "NEXT_PUBLIC_FRONTEND_URL=https://muhammad-rehan.github.io/AI-Powered-Todo-App" >> .env.local
 

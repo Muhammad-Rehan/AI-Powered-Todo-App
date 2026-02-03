@@ -11,9 +11,19 @@ export interface Task {
 }
 
 class ApiService {
-  private baseUrl =
-    process.env.NEXT_PUBLIC_API_BASE_URL ??
-    "http://127.0.0.1:8000";  // Default to local during development
+  private baseUrl: string;
+
+  constructor() {
+    if (
+      typeof window !== "undefined" &&
+      window.location.hostname === "muhammad-rehan.github.io"
+    ) {
+      this.baseUrl = "https://ai-powered-todo-app-backend.vercel.app";
+    } else {
+      this.baseUrl =
+        process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000";
+    }
+  }
 
   private async request(
     endpoint: string,
