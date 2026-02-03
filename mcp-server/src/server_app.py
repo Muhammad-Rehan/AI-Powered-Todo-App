@@ -118,6 +118,11 @@ async def health_check():
     }
 
 
+
+# For Vercel deployment, make the app available as a module-level variable
+app_instance = app
+
+# For local development
 if __name__ == "__main__":
     port = int(os.getenv("MCP_PORT", "8001"))
     uvicorn.run("src.server_app:app", host="0.0.0.0", port=port, reload=True)
