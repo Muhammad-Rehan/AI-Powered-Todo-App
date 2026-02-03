@@ -22,7 +22,7 @@ start "Frontend" cmd /k "cd /d %~dp0frontend && npm run dev"
 
 echo.
 echo All services started successfully!
-echo MCP Server: http://localhost:8001
+echo MCP Server: https://ai-mcp-server-sigma.vercel.app/ (Production) or http://localhost:8001 (Local)
 echo Backend: http://localhost:8000
 echo Frontend: http://localhost:3000
 echo.

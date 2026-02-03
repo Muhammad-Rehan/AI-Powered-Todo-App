@@ -28,7 +28,7 @@ class AIAssistantService:
             self.openai_client = OpenAI(api_key=settings.openai_api_key)
             self.model = "gpt-3.5-turbo"  # Default OpenAI model
 
-        self.mcp_server_url = os.getenv("MCP_SERVER_URL", "http://localhost:8001")
+        self.mcp_server_url = os.getenv("MCP_SERVER_URL", "https://ai-mcp-server-sigma.vercel.app/")
         self.system_instructions = self._get_system_instructions()
 
         # Define available tools that match MCP server tools

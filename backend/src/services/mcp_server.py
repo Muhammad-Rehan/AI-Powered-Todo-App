@@ -149,7 +149,7 @@ def connect_to_mcp_server():
         Connection object or client
     """
     # Get MCP server URL from environment
-    mcp_server_url = os.getenv("MCP_SERVER_URL", "http://localhost:8001")
+    mcp_server_url = os.getenv("MCP_SERVER_URL", "https://ai-mcp-server-sigma.vercel.app/")
 
     # In a real implementation, this would establish a connection to the MCP server
     # For now, we'll return a placeholder

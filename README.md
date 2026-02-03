@@ -81,7 +81,7 @@ pip install -r requirements.txt
 DATABASE_URL=postgresql://username:password@localhost:5432/todo_app
 JWT_SECRET_KEY=your-super-secret-jwt-key-change-in-production
 OPENAI_API_KEY=your_openai_api_key_here
-MCP_SERVER_URL=http://localhost:8001
+MCP_SERVER_URL=https://ai-mcp-server-sigma.vercel.app/
 ```
 
 4. Run the application:
@@ -156,7 +156,7 @@ The application uses the following environment variables:
 - `JWT_ALGORITHM` - Algorithm for JWT token signing (default: HS256)
 - `JWT_ACCESS_TOKEN_EXPIRE_MINUTES` - Token expiration time in minutes
 - `OPENAI_API_KEY` - API key for OpenAI services (or OpenRouter if using OpenRouter)
-- `MCP_SERVER_URL` - URL for the MCP server (default: http://localhost:8001)
+- `MCP_SERVER_URL` - URL for the MCP server (default: https://ai-mcp-server-sigma.vercel.app/)
 - `OPENROUTER_BASE_URL` - Base URL for OpenRouter API (default: https://openrouter.ai/api/v1)
 - `OPENROUTER_MODEL` - Model to use with OpenRouter (default: google/gemini-2.0-flash-exp:free)
 - `USE_OPENROUTER` - Flag to use OpenRouter instead of OpenAI (default: false)
